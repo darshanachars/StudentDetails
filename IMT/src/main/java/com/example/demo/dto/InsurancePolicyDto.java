@@ -16,13 +16,13 @@ import jakarta.validation.constraints.NotNull;
 public class InsurancePolicyDto {
 private String policyNumber;
 	private String id;
-	
+	@NotBlank(message = "type of policy cannot be empty")
 	private String type;
 	
-	
+	@NotBlank(message = "coverage amount cannot be blank")
 	private double coverageAmount;
 	
-	
+	@NotBlank(message = "premium amount cannot be blank")
 	private double premium;
 	
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
@@ -45,7 +45,7 @@ private String policyNumber;
 	public void setClientDto(ClientDto clientDto) {
 		this.clientDto = clientDto;
 	}
-
+//hello
 	
 	public String getId() {
 		return id;

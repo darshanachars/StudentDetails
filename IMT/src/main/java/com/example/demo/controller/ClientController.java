@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ClientDto;
@@ -21,7 +22,10 @@ import com.example.demo.exceptionHandler.ApiResponse;
 import com.example.demo.service.ClientService;
 import com.example.demo.service.impl.ClientServiceImpl;
 
+import jakarta.validation.Valid;
+
 @RestController
+@RequestMapping("/api")
 public class ClientController {
 	@Autowired
 	private ClientService clientService;
@@ -39,13 +43,13 @@ public class ClientController {
 	}
 	
 	@PostMapping("/clients")
-	public ResponseEntity<ClientDto> createClient(@RequestBody ClientDto client){
+	public ResponseEntity<ClientDto> createClient(@Valid @RequestBody ClientDto client){
 		ClientDto c=clientService.createClient(client);
 		return ResponseEntity.ok(c);
 	}
 	
 	@PutMapping("/clients/{id}")
-	public ResponseEntity<ClientDto> updateClient(@RequestBody ClientDto client, @PathVariable Integer id){
+	public ResponseEntity<ClientDto> updateClient( @RequestBody ClientDto client, @PathVariable Integer id){
 		ClientDto c=clientService.updateClient(client, id);
 		return ResponseEntity.status(201).body(c);
 	}

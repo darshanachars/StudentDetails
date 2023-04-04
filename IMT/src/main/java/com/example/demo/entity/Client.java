@@ -87,6 +87,7 @@ public class Client {
 		return "Client [id=" + id + ", name=" + name + ", dateOfBirth=" + dateOfBirth + ", address=" + address
 				+ ", contactInformation=" + contactInformation + ", insurancePolicies=" + insurancePolicies + "]";
 	}
+
 	
 	
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -18,7 +19,10 @@ import com.example.demo.dto.InsurancePolicyDto;
 import com.example.demo.exceptionHandler.ApiResponse;
 import com.example.demo.service.InsuracePolicyService;
 
+import jakarta.validation.Valid;
+
 @RestController
+@RequestMapping("/api")
 public class InsurancePolicyController {
 	@Autowired
 	private InsuracePolicyService insurancePolicy;
@@ -38,13 +42,13 @@ public class InsurancePolicyController {
 	}
 	
 	@PostMapping("/policies")
-	public ResponseEntity<InsurancePolicyDto> createPolicy(@RequestBody InsurancePolicyDto ip){
+	public ResponseEntity<InsurancePolicyDto> createPolicy(@Valid @RequestBody InsurancePolicyDto ip){
 		InsurancePolicyDto createInsuracePolicy = insurancePolicy.createInsuracePolicy(ip);
 		return ResponseEntity.ok(createInsuracePolicy);
 	}
 	
 	@PutMapping("/policies/{id}")
-	public ResponseEntity<InsurancePolicyDto> updatePolicy(@RequestBody InsurancePolicyDto ins, @PathVariable Integer id){
+	public ResponseEntity<InsurancePolicyDto> updatePolicy( @RequestBody InsurancePolicyDto ins, @PathVariable Integer id){
 		InsurancePolicyDto updateInsurancePolicy = insurancePolicy.updateInsurancePolicy(ins, id);
 		return ResponseEntity.status(201).body(updateInsurancePolicy);
 	}

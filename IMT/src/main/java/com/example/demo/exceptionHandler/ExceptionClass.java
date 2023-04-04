@@ -52,7 +52,7 @@ public class ExceptionClass {
 	}
 	@ExceptionHandler(DateTimeParseException.class)
 	public ResponseEntity<ApiResponse> dateTypeException(DateTimeParseException date){
-		String s="please enter date in yyyy-mm-dd format";
+		String s="Date should be in yyyy-mm-dd format";
 		ApiResponse api=new ApiResponse(s, false);
 		return ResponseEntity.status(400).body(api);
 	}

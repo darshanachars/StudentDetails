@@ -9,18 +9,21 @@ import com.example.demo.entity.Client;
 import com.example.demo.entity.InsurancePolicy;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 public class ClientDto {
 	private int id;
-
+	@NotBlank(message = "name cannot be blank")
+	@Size(min = 2, max = 15, message = "name should me min 2 char and max 15 char.")
 	private String name;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@NotNull(message = "please enter date in yyyy-mm-dd format")
 	private String dateOfBirth;
-
+	@NotBlank(message = "address cannot be empty")
 	private String address;
-
+	@NotBlank(message = "contact Information cannot be blank")
 	private String contactInformation;
 	
 	private List<InsurancePolicy> insurancePolicies=new ArrayList<>();

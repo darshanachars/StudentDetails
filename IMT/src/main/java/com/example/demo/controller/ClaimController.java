@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ClaimDto;
@@ -21,6 +22,7 @@ import com.example.demo.service.ClaimService;
 import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/api")
 public class ClaimController {
 	@Autowired
 	private ClaimService claimServ;
@@ -44,7 +46,7 @@ public class ClaimController {
 	}
 	
 	@PutMapping("/claims/{id}")
-	public ResponseEntity<ClaimDto> updateClaims(@RequestBody ClaimDto claim, @PathVariable Integer id){
+	public ResponseEntity<ClaimDto> updateClaims( @RequestBody ClaimDto claim, @PathVariable Integer id){
 		ClaimDto c=claimServ.updateClaims(claim, id);
 		return ResponseEntity.status(201).body(c);
 	}

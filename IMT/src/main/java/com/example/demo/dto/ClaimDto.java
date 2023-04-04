@@ -14,14 +14,14 @@ import jakarta.validation.constraints.Pattern;
 public class ClaimDto {
 	
 	private int id;
-	@NotBlank(message = "please enter claim number")
+	@NotBlank(message = "claim number cannot be blank")
 	private String claimNumber;
-	
+	@NotBlank(message="description cannot be blank")
 	private String description;
 	@DateTimeFormat(pattern = "yyyy-mm-dd")
 	@NotNull(message = "please enter date in yyyy-mm-dd format")
 	private LocalDate claimDate;
-	
+	@NotBlank(message = "claimStatus cannot be blank")
 	private String claimStatus;
 	@JsonIgnore
 	private InsurancePolicy insurancePolicy;
