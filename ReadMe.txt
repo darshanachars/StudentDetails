@@ -9,6 +9,7 @@ Installation:
 	This project is built on Java 17, Spring Boot 3.0.5 and Maven Build tool.
 This project consists of maven dependencies such as Spring web, Spring Data JPA, H2 Database, etc. once you import the project the system will
 automatically downloads the jar files. This project comes with the apache Tomcat embedded server.
+	(NOTE: User name for H2 database= sa. And password=password)
 
 Architecture:
 	This platform follows a layered architecture, with the Restful API's serving as the presentation layer, the services are the buisiness logic layer
@@ -53,7 +54,7 @@ as
 	}
 
 	This platform also validates the input data to ensure the data integrity. For example the input for claimDate field should be in the format 'yyyy-mm-dd'
-if the requests sends with any other format it gives message as "Date format should be yyyy-mm-dd". And if some of the fields are kept null, the platform 
+if the requests sends with any other format it gives message as "Date format should be in yyyy-mm-dd". And if some of the fields are kept null, the platform 
 shows error message as
 	{
 		"message":" Name cannot be empty"
