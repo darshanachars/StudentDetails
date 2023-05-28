@@ -1,68 +1,60 @@
-Project Title: Insurance Management platform
+Project Title: Student Detail Platform
 
 Introduction:
-	This is the documentation for an insurance management platform which allows users to manage insurance policies, clients and claims
-using Spring Boot and java. It offers a range of features and funcionalities for managing insurance related information.
+	This is the documentation for a Student Details platform which allows users to fetch Student Details with various filters and pagination
+using Spring Boot and java. It offers a range of features and funcionalities for managing Student Details in DashBoard.
 	
 
 Installation:
 	This project is built on Java 17, Spring Boot 3.0.5 and Maven Build tool.
-This project consists of maven dependencies such as Spring web, Spring Data JPA, H2 Database, etc. once you import the project the system will
+This project consists of maven dependencies such as Spring web, Spring Data JPA, mySql Database, etc. once you import the project the system will
 automatically downloads the jar files. This project comes with the apache Tomcat embedded server.
-	(NOTE: User name for H2 database= sa. And password=password)
+	(NOTE: User name and password for the mySql database specified is root and root respectively. If the user name and password of your local database is different then it should
+		be specified in application.properties file accordingly.)
 
 Architecture:
 	This platform follows a layered architecture, with the Restful API's serving as the presentation layer, the services are the buisiness logic layer
-and the repositories as the data access layer. This project also features Data Transfer Layer(DTO-layer) which is used here to facilitate communication between
-API's and server without esposing the sensitive information from the original resource. The platform uses Spring Data JPA to interact with the embedded database H2.
+and the repositories as the data access layer. The platform uses Spring Data JPA to interact with the mySql Database.
 
 Domain Models:
-	The platform has three main domain models: Client, Insurance Policy and Claim
-	The Client model represents a client with properties such as name, date of birth, address and contact information.
-	The Insurance Policy Model represents an insurance policy with properties like policy number, type, coverage amount, premium, start date and end date.
-	The Claim model represents an insurance policy claim with properties like claim number, description, claim date and claim status.
-Each claim is associated with an insurance policy and each policy is associated with a client.
+	The platform has one main domain model: Student Details
+	The model represents students with properties such as Id, Name, Date of birth, Gender, Marks, Grade.
+	
 
 API Documentation:
 	The platform exposes several REST'ful API's that allow users to perform various operations.
 These include:
-	i. 	GET /api/clients: Retrieves a list of all clients.
-	ii. 	GET /api/clients/{id}: Retrieves a client by ID.
-	iii. 	POST /api/clients: Creates a new client.
-	iv. 	PUT /api/clients/{id}: Updates a client's information by ID.
-	v. 	DELETE /api/clients/{id}: Deletes a client by ID.
 
-	vi. 	GET /api/policies: Retrieves a list of all insurance policies.
-	vii. 	GET /api/policies/{id}: Retrieves a specific insurance policy by ID.
-	viii. 	POST /api/policies: Creates a new insurance policy.
-	ix. 	PUT /api/policies/{id}: Updates an insurance policy.
-	x.	 DELETE /api/policies/{id}: Deletes an insurance policy.
+	(NOTE:- All the following API's contans pagination, specifying the page details is optional. If you dont specify Parameters such as pageSize and pageNo in the URI,
+		then it will take default value as pageSize=5 and pageNo=0)
 
-	xi. 	GET /api/claims: Fetch all claims.
-	xii. 	GET /api/claims/{id}: Fetch a specific claim by ID.
-	xiii.	 POST /api/claims: Create a new claim.
-	xiv. 	PUT /api/claims/{id}: Update a claim's information.
-	xv.	 DELETE /api/claims/{id}: Delete a claim.
 
-Exception Handling and validation:
-	The platform uses Spring's exception handling framework to handle exceptions and returns appropriate error messages to the client in json format.
-For example, when the project gets a request for a client/policy/claim resource which does not exists in the database by the given id, this platform gives the response
-as
-	{
-		"message": "Policy not found with the given id: 10",
-		"status": false
-	}
+	I.	GET	/StudentDetails/findAll : This URI fetches all the Student Details present in the Database.
+						 Example:- http://localhost:8080/studentDetails/findAll?pageSize=3&pageNo=0
 
-	This platform also validates the input data to ensure the data integrity. For example the input for claimDate field should be in the format 'yyyy-mm-dd'
-if the requests sends with any other format it gives message as "Date format should be in yyyy-mm-dd". And if some of the fields are kept null, the platform 
-shows error message as
-	{
-		"message":" Name cannot be empty"
-	}
+	II.	GET	/StudentDetails/filterByMarks : This URI fetches the Student Details with Marks filter from the Database.
+						        This URI should be accessed with compulory minMarks and maxMarks parameters and optional page size &no parameters.
+							Example:- http://localhost:8080/studentDetails/filterByMarks?minMarks=300&maxMarks=400
+	
+	III.	GET	/StudentDetails/filterByGender : This URI fetches all the Student Details with Gender filter.
+							This URI should be accessed with one or more gender parameters and optional page size& no parameters.
+							Example:- ttp://localhost:8080/studentDetails/filterByGender?gender1=male
+								  http://localhost:8080/studentDetails/filterByGender?gender1=female&gender2=others
+
+	IV.	GET 	/StudentDetails/filterByBirthYear : This URI fetches all the Student Details with Birth Year filter.
+							   This URI should be accessed with compulsory year parameter and optional page size & no parameters.
+							   Example:- Example:- http://localhost:8080/studentDetails/filterByBirthYear?year=2009
+
+	V.	GET	/StudentDetails/filterByGrade : This URI fetches all the Student Details with Grade filter.
+							This URI should be accessed with at least one grade and optional page size& no parameters.
+							Example:- http://localhost:8080/studentDetails/filterByGrade?grade1=A&grade2=C		
+								  http://localhost:8080/studentDetails/filterByGrade?grade1=B		      
+
+
 
 conclusion:
-	This insurance management platform provides a range of features and functionalities for managing clients, policies and claims. It is built using SpringBoot 
-and java. And it uses a layered architecture to ensure seperation of concerns and maintability. The platform also includes proper exception handling and validation 
+	This Student Details platform provides a range of features and functionalities for Displaying Student Details. It is built using SpringBoot 
+and java. And it uses a layered architecture to ensure seperation of concerns and maintability. The platform also includes proper pagination, filters 
 proper API usage and integrity.
 
 
